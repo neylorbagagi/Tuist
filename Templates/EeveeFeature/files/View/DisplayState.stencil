@@ -1,0 +1,19 @@
+//
+//  {{ name }}DisplayState.swift
+//
+
+struct {{ name }}DisplayState {
+    let title: String
+    let elementDisplayStateList: [ElementDisplayState]
+}
+
+struct ElementDisplayState {
+    let id: String
+}
+
+extension {{ name }}DisplayState {
+    static let empty = {{ name }}DisplayState(
+        title: "",
+        elementDisplayStateList: []
+    )
+}

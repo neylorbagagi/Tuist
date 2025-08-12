@@ -1,0 +1,26 @@
+//
+//  {{ name }}DisplayStateBuilder.swift
+//
+
+final class {{ name }}DisplayStateBuilder {
+    static func make(from data: {{ name }}DataModel) -> {{ name }}DisplayState {
+        return {{ name }}DisplayState(
+            title: title(),
+            elementDisplayStateList: elementDisplayStateList(
+                data: data.elementList
+            )
+        )
+    }
+    
+    private static func title() -> String {
+        "ViewController Title" 
+    }
+    
+    private static func elementDisplayStateList(data: [ElementDataModel]) -> [ElementDisplayState] {
+        return data.map {
+            ElementDisplayState(
+                id: $0.id
+            )
+        }
+    }
+}

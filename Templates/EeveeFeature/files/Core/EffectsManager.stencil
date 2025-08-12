@@ -1,0 +1,35 @@
+//
+//  {{ name }}EffectsManager.swift
+//
+
+import Combine
+
+protocol {{ name }}EffectsManaging {
+    func handleViewDidLoad()
+}
+
+final class {{ name }}EffectsManager: {{ name }}EffectsManaging {
+    private let eventStream: {{ name }}EventStream
+    private let dataProvider: {{ name }}DataProviding
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(eventStream: {{ name }}EventStream, dataProvider: {{ name }}DataProviding) {
+        self.eventStream = eventStream
+        self.dataProvider = dataProvider
+        binding()
+    }
+    
+    private func binding() {
+        eventStream
+            .sink { [weak self] event in
+            switch event {
+            case .viewDidLoad:
+                self?.handleViewDidLoad()
+            }
+        }.store(in: &cancellables)
+    }
+    
+    internal func handleViewDidLoad() {
+        dataProvider.fetchNameQuizData()
+    }
+}

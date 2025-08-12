@@ -1,0 +1,32 @@
+//
+//  {{ name }}Builder.swift
+//
+
+import UIKit
+
+protocol {{ name }}Buildable {
+    func build() -> UIViewController
+}
+
+final class {{ name }}Builder: {{ name }}Buildable {
+    
+    func build() -> UIViewController {
+        let eventStream = {{ name }}EventStream()
+        let dataProvider = {{ name }}DataProvider()
+        
+        let effectsManager = {{ name }}EffectsManager(
+            eventStream: eventStream,
+            dataProvider: dataProvider
+        )
+        
+        let viewModel = {{ name }}ViewModel(
+            dataProvider: dataProvider,
+            effectsManager: effectsManager
+        )
+        
+        return {{ name }}View(
+            viewModel: viewModel,
+            eventStream: eventStream
+        )
+    }
+}

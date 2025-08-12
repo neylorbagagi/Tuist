@@ -1,0 +1,34 @@
+//
+//  {{ name }}ViewModel.swift
+//
+
+import Combine
+
+final class {{ name }}ViewModel {
+    
+    @Published var displayState: {{ name }}DisplayState
+    
+    private let dataProvider: {{ name }}DataProviding
+    private let effectsManager: {{ name }}EffectsManaging
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(dataProvider: {{ name }}DataProviding, effectsManager: {{ name }}EffectsManaging) {
+        self.dataProvider = dataProvider
+        self.displayState = .empty
+        self.effectsManager = effectsManager
+ 
+        binding()
+    }
+    
+    private func binding() {
+        dataProvider.dataModel
+            .sink { [weak self] data in
+                self?.updateDisplayState(with: data)
+            }.store(in: &cancellables)
+    }
+    
+    private func updateDisplayState(with dataModel: {{ name }}DataModel) {
+        let newDisplayState = {{ name }}DisplayStateBuilder.make(from: dataModel)
+        displayState = newDisplayState
+    }
+}

@@ -1,0 +1,25 @@
+//
+//  {{ name }}Router.swift
+//
+
+import Foundation
+import UIKit
+
+protocol {{ name }}Routing {
+    func present()
+}
+
+final class {{ name }}Router: {{ name }}Routing {
+    
+    weak var viewController: UIViewController?
+    
+    func present() {
+        let navigationController = viewController?.navigationController
+        
+        let vc = UIViewController()
+        vc.view.backgroundColor = .green
+        vc.title = "New ViewController"
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}

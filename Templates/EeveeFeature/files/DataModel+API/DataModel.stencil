@@ -1,0 +1,24 @@
+//
+//  {{ name }}DataModel.swift
+//
+
+struct {{ name }}DataModel: Codable {
+    let elementList: [ElementDataModel]
+}
+
+struct ElementDataModel: Codable {
+    let id: String
+
+    enum CodingKeys: String, CodingKey {
+        case id
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""
+    }
+}
+
+extension {{ name }}DataModel {
+    static let empty = {{ name }}DataModel(elementList: [])
+}

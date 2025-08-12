@@ -1,0 +1,11 @@
+//
+//  {{ name }}Events.swift
+//
+
+import Combine
+
+typealias {{ name }}EventStream = PassthroughSubject<{{ name }}Events, Never>
+
+enum {{ name }}Events {
+    case viewDidLoad
+}
